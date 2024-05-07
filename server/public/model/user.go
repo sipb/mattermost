@@ -350,6 +350,10 @@ func (u *User) IsValid() *AppError {
 		return InvalidUserError("email", u.Id, u.Email)
 	}
 
+	if u.Username != strings.Split(u.Email, "@")[0] {
+		return InvalidUserError("username", u.Id, u.Username)
+	}
+
 	if utf8.RuneCountInString(u.Nickname) > UserNicknameMaxRunes {
 		return InvalidUserError("nickname", u.Id, u.Nickname)
 	}

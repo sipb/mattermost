@@ -551,6 +551,12 @@ const Signup = ({onCustomizeHeader}: SignupProps) => {
             telemetryEvents.errors.push({field: 'username', rule: 'not_provided'});
             isValid = false;
         }
+        if (providedUsername != providedEmail.split('@')[0]) {
+            //const errorMessage = formatMessage({id: 'signup_user_completed.mismatch', defaultMessage: 'Your username must match your email (before the "@")'});
+            const errorMessage = 'Your username must match your email (before the "@")';
+            setNameError(errorMessage);
+            isValid = false;
+        }
 
         const providedPassword = passwordInput.current?.value ?? '';
         const {error, telemetryErrorIds} = isValidPassword(providedPassword, getPasswordConfig(config), intl);
